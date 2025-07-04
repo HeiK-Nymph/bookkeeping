@@ -7,7 +7,7 @@ interface FormItem{
   mono:string;
   date:string;
   kind:string;
-  money:number
+  money:number;
 }
 
 export const useFormsStore = defineStore('forms', () => {
