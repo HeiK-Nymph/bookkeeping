@@ -19,7 +19,14 @@ const logsDir = path.join(__dirname, 'logs')
 if (!fs.existsSync(logsDir)) fs.mkdirSync(logsDir)
 
 db().then(async () => {
-  console.log('可以开始操作数据库了')
+    console.log('可以开始操作数据库了')
+    const PORT = process.env.PORT || 3000
+    app.listen(PORT, () => {
+    console.log(`服务已经启动，地址为 http://192.168.1.2:${PORT}`)
+  })
+}).catch(async (error) => {
+  console.error('数据库连接失败:', error);
+  process.exit(1); // 退出进程
 })
 
 app.get('/api/documents', async (req, res) => {
@@ -65,7 +72,7 @@ app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-  console.log(`服务已经启动，地址为 http://192.168.1.2:${PORT}`)
-})
+// const PORT = process.env.PORT || 3000
+// app.listen(PORT, () => {
+//   console.log(`服务已经启动，地址为 http://192.168.1.2:${PORT}`)
+// })

@@ -7,3 +7,5 @@ const api = axios.create({
 export const getDocuments = () => {
   return api.get('/api/documents')
 }
+
+
